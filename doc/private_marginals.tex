@@ -1,0 +1,40 @@
+\documentclass[paper=a4, fontsize=11pt]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{url}
+
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\fancyhead{}
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+
+\title{
+        \usefont{OT1}{bch}{b}{n}
+        \normalfont \normalsize \textsc{California Institute of Technology}\\
+                                 \textsc{Dept. of Computing and Mathematical Sciences}
+        \\ [25pt]
+        \horrule{0.5pt}
+        \\ [0.4cm]
+        \huge Implementing an Efficient Mechanism for Privately Releasing Marginals
+        \horrule{2pt}
+        \\[0.5cm]
+}
+\author{
+        \normalfont \normalsize
+        Timothy Holland \\[-3pt]
+        \normalsize \today
+}
+\date{}
+  
+\begin{document}
+\maketitle
+\input{doc/body.tex}
+\end{document} 
