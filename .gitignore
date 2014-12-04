@@ -4,4 +4,6 @@
 *.fls
 *.log
 *.pdf
+*.pyc
+venv
 /target
