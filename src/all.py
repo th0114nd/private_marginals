@@ -74,10 +74,11 @@ def read(filename):
     return records, len(records[0]), len(records)
 
 def priv_compute(db, dist, epsilon=20, delta=0.8):
-    def c(e, d):
+    def c(eps, delt):
         from math import sqrt, log    
-        return (1 + sqrt(2 * log(1 / d))) / e
-
+        return (1 + sqrt(2 * log(1 / delt))) / eps
+    k = len(dist)
+    T = 4 * len(db) / c(epsilon, delta) / d ** (3k / 4.0)
     print(db, dist, epsilon, delta, sep='/')
 
 def noise(epsilon, delta, sigma, m):

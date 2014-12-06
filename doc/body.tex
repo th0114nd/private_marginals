@@ -1,7 +1,48 @@
 \section{Motivation}
 
 \section{Challenges Faced}
+I quickly found that there were many unanticipated implementation challenges
+associated with the the algorithm in the paper. The authors specified it
+at a very high level, and although a cursory glance would indicate that it
+was fairly straightforward, there were several pieces assumed as given that
+needed to be figured out. In this section, I enumerate those problems 
+and whether or not I was succesfuly in overcoming them.
+\subsection{Convex Programming}
 
+
+\subsection{Gaussian Width, Diameter of a convex set}
+In order to determine the number of iterations $T$ of {\bf Frank-Wolfe},
+I needed to compute
+\begin{align}
+T = \frac{4n \mathrm{diam}(P^{1/2}L)^2}{c(\epsilon, \delta) \ell^\star(L)}
+\end{align}
+for $L$ an efficient relaxation (a larger convex set that a linear program
+can be solved over in polynomial time) of
+$\{Au \in \mathbb R^m : u \in B_1 \subset \mathbb R^N\}$ where $A$ was the
+query matrix. $4n$ is easy enough as the size of the database, and $c(\epsilon,
+\delta)$ comes from the needed width of the Gaussian mechanism:
+\[ c(\epsilon, \delta) = \frac{1 + \sqrt{2 \ln(1/\delta)}}\epsilon \]
+For the diameter $\mathrm{diam}(P^{1/2}L)$, by the author's {\bf Lemma 4.4}
+we see that $\mathrm{diam}(P^{1/2}L) \leq 1$. 
+Note that $l^\star$ is the Gaussian width, described as
+\[ \ell^\star(X) = \mathbb E_{g \sim \mathcal N(0, 1)^m} \; \max_{v \in X} \;
+        \langle g, v \rangle \]
+For the particular $L$ described on the bottom of page 11 (and $L_0$) described
+above, the author's claim $\ell^\star(P^{1/2}L_0) \leq
+    d^{\left \lceil k/2 \right \rceil/2}$ and that there is a constant
+$C$ such that \[\ell^\star(QL) \leq \ell^\star(QL_0)\] for all
+$Q \in \mathbb R^{d^k \times d^k}$, in particular $P^{1/2}$ and the identity.
+Making a variation on their computation of $\ell^\star(P^{1/2}L)$ in 
+{\bf Lemma 4.1}, we see that for for $w, z \in \{\pm 1\}^{d^{k/2}}$, we have
+
+$||w \otimes z||^2_2 = \sum 1 = d^k$, so that by the stability of Gaussians
+if $g \sim \mathcal N(0, 1)$ then $\langle g, w \otimes z \rangle \sim \mathcal
+N(0, d^{k/2})$
+Taking the maximum of $n$ normal random variables with variance $\sigma^2$
+is $O(\sigma \sqrt{\log(n)})$, and as $\sigma = d^{k/2}, n = 2^{2d^{k/2}}$ we
+have that it is $O(d^{k/2})$, so that $\ell^\star(L) \approx d^{3k/4}$.
+So then I computed $T$ as 
+\[ T = \frac{4n}{c(\epsilon, \delta) d^{3k/4}} \]
 \section{Architecture and Design}
 
 \section{Results and Tests}
